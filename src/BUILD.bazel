@@ -1,25 +1,22 @@
-load("@pip_requirements//:requirements.bzl", "requirement")
 load("@bazel_tools//tools/build_defs/pkg:pkg.bzl", "pkg_tar")
 
-py_binary(
-    name = "foo",
+filegroup(
+    name = "targets",
     srcs = [
-        "foo.py",
-    ],
-    main = "foo.py",
-    deps = [
-        requirement("numpy"),
+        "//src/cpp:foo_cpp",
+        "//src/py:foo_py",
     ],
 )
 
 pkg_tar(
     name = "foo_tar",
     srcs = [
-        ":foo",
+        ":targets",
     ],
+    # requires >= bazel 0.15.0
     include_runfiles = True,
     package_dir = "/opt",
-    # without the strip_prefix=".", the directory order is not preserved. 
+    # without the strip_prefix=".", the directory order is not preserved.
     # see https://groups.google.com/forum/#!topic/bazel-discuss/LHjopuUvZks for more info
     strip_prefix = ".",
 )

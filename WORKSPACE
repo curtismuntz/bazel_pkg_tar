@@ -17,3 +17,14 @@ pip_import(
 load("@pip_requirements//:requirements.bzl", "pip_install")
 
 pip_install()
+
+new_local_repository(
+    name = "local_boost",
+    build_file = "third_party/boost.BUILD",
+    path = "/usr/",
+)
+
+bind(
+    name = "boost",
+    actual = "@local_boost//:boost",
+)

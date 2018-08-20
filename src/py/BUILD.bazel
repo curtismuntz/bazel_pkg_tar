@@ -1,0 +1,13 @@
+load("@pip_requirements//:requirements.bzl", "requirement")
+
+py_binary(
+    name = "foo_py",
+    srcs = [
+        "foo.py",
+    ],
+    main = "foo.py",
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("numpy"),
+    ],
+)

@@ -1,0 +1,10 @@
+cc_binary(
+    name = "foo_cpp",
+    srcs = [
+        "main.cpp",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//external:boost",
+    ],
+)
